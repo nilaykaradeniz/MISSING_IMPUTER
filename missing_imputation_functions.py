@@ -23,6 +23,34 @@ df=eda.csv_file("WORK_FILE").copy()
 cat_cols, num_cols, cat_but_car,typless_cols =eda.col_types(df)
 na_col,null_high_col_name=eda.desc_statistics(df,num_cols,cat_cols,na_rows=True,high_null_count=True,quantile=True)
 
+
+def missing_correlation(dataframe):
+    question = input("Write YES if you want to apply value to certain variables. Write NO if you don't want it to apply to all variables").upper()
+    if question == "YES":
+        col_list = []
+        while True:
+            col_name = input("Please enter the variable name... Write 'STOP' for stop !!!")
+            if col_name != 'STOP':
+                col_list.append(col_name)
+                if col_name not in dataframe.columns:
+                    col_list.remove(col_name)
+            else:
+                print("Added variables...")
+                msno.matrix(dataframe[col_list])
+                msno.heatmap(dataframe[col_list])
+                plt.show()
+                break
+    elif question == "NO":
+        msno.matrix(dataframe,figsize=(10,8), fontsize=8)
+        msno.heatmap(dataframe,figsize=(10,8), fontsize=8)
+        plt.show()
+    else:
+        print("Wrong information...")
+    return None
+missing_correlation(df)
+
+
+
 def dict_append(dataframe,dict_statistic,col,mean=False,median=False,mode=False):
     if mean:
         dict_statistic["col_name"].append(col)
