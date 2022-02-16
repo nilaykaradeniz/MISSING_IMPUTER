@@ -1,5 +1,6 @@
 import pandas as pd
 import warnings
+import missingno as msno
 from feature_engine.imputation import MeanMedianImputer
 from feature_engine.imputation import ArbitraryNumberImputer
 from feature_engine.imputation import CategoricalImputer
